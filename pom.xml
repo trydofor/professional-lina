@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pro.fessional</groupId>
+    <artifactId>nevermore-hero</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>Nevermore-Hero</name>
+    <description>Somewhat Useful Java Annotation Processor</description>
+
+    <modules>
+        <module>nevermore</module>
+        <module>nevermore-processor</module>
+    </modules>
+    <url>https://github.com/trydofor/professional-nevermore</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Trydofor</name>
+            <email>trydofor@gmail.com</email>
+            <organization>moilioncircle</organization>
+            <organizationUrl>https://www.moilioncircle.com/</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:trydofor/professional-nevermore.git</connection>
+        <url>scm:git:git@github.com:trydofor/professional-nevermore.git</url>
+        <developerConnection>scm:git:git@github.com:trydofor/professional-nevermore.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/trydofor/professional-nevermore/issues</url>
+    </issueManagement>
+
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Main-Class>pro.fessional.WhoAmI</Main-Class>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <doclint>none</doclint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- build info -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.9.10</version>
+                <!-- 5.0.0	Java 11 -->
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <verbose>true</verbose>
+                    <offline>true</offline>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>git.branch</includeOnlyProperty>
+                        <includeOnlyProperty>git.build.(host|time|version|user.name|number.*)</includeOnlyProperty>
+                        <includeOnlyProperty>git.closest.*</includeOnlyProperty>
+                        <includeOnlyProperty>git.commit.(time|user.name|id.abbrev|id.full|message.full)</includeOnlyProperty>
+                        <includeOnlyProperty>git.dirty</includeOnlyProperty>
+                        <includeOnlyProperty>git.local.*</includeOnlyProperty>
+                        <includeOnlyProperty>git.tags</includeOnlyProperty>
+                    </includeOnlyProperties>
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+            <plugin>
+                <!-- https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <flattenedPomFilename>.pom.xml</flattenedPomFilename>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <!-- -DrepoToken=${{ secrets.COVERALLS_REPO_TOKEN }} -->
+            <id>coverage</id>
+            <properties>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.3.0</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.11</version>
+                        <configuration>
+                            <excludes>
+                                <!-- just for fun -->
+                                <exclude>**/WhoAmI.*</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <maven.install.skip>true</maven.install.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>541B1728468267BFA83FE092CE8F6F63A835DB68</keyname>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy-ossrh</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.13</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <!-- https://central.sonatype.org/publish/publish-maven/ -->
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+</project>

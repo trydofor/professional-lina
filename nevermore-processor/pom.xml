@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>pro.fessional</groupId>
+        <artifactId>nevermore-hero</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>nevermore-processor</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Processor</name>
+    <description>Compile Annotation Processor</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>pro.fessional</groupId>
+            <artifactId>nevermore</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+</project>
